@@ -1,0 +1,89 @@
+{
+  "schema": "new-yokosuka-timed-transition-access-v1",
+  "generatedFrom": [
+    {
+      "path": "data/source/d000-scripted-store-state.json",
+      "sha256": "d1a05d8656c2279ebb2802689196a25a58ede3d81060e5b697c338b9f51d942c"
+    },
+    {
+      "path": "data/source/d000-door-transitions.json",
+      "sha256": "0135f6e0719e2d3eea1cc9303a89abd0c4f65a6a5fd4e49245c6a36d20374bc4"
+    },
+    {
+      "path": "data/source/native-map-transitions.json",
+      "sha256": "d5c14cdb336bb591886803cfe9a1ff676fa8f0460e2d575e66575c63185a3b91"
+    },
+    {
+      "path": "data/source/world-access-policy.json",
+      "sha256": "b2d8d9541797c5a37b7e22e40950b073eed62e095395f02746453071b67654ad"
+    }
+  ],
+  "alwaysAccessibleInteriorWorldIds": [
+    "interior",
+    "cinema",
+    "arcade",
+    "djaz"
+  ],
+  "alwaysAccessibleInteriorPolicy": "Interiors exposed by the left-sidebar travel menu remain accessible at all public-clock times. This explicit development/exploration override takes precedence over public opening-hour rules, but does not fabricate native door evidence or alter story progression.",
+  "rules": [
+    {
+      "id": "dobuita-layer-14-selector-30-public-hours",
+      "transitionId": "d000-door-30-to-dcha-entry-0",
+      "source": {
+        "worldId": "dobuita",
+        "area": "D000",
+        "doorSelector": 30,
+        "layer": 14,
+        "position": [
+          126.362854,
+          -1.8,
+          65.0345
+        ],
+        "maximumHorizontalDistance": 10
+      },
+      "destination": {
+        "worldId": "dcha",
+        "area": "DCHA",
+        "entry": 0
+      },
+      "openWindow": {
+        "kind": "native-clock-window",
+        "startMinute": 480,
+        "endMinute": 1170,
+        "dayBoundaryHour": 6,
+        "boundary": "start-inclusive, end-exclusive"
+      },
+      "authorizationLifetimeMs": 15000,
+      "denialMessage": "This shop is closed. It is open from 8:00 AM to 7:30 PM.",
+      "accessDomain": "public-opening-hours",
+      "personalStoryFallback": {
+        "status": "none-reviewed",
+        "policy": "Mandatory personal objectives require an explicit reviewed fallback; public hours never inspect personal story progress."
+      },
+      "evidence": {
+        "overlayLayer": 14,
+        "dispatchKind": "direct-transition",
+        "sourceDoorModel": "S1_D000_DR02_016.MT5",
+        "selectorCompareFileOffset": "0x794ac",
+        "coroutineCallFileOffset": "0x794d6"
+      }
+    }
+  ],
+  "presentationOnlyAssociations": [
+    {
+      "sourceWorldId": "dobuita",
+      "layer": 13,
+      "doorSelector": 63,
+      "dispatchKind": "native-non-transition",
+      "destination": null,
+      "openWindow": {
+        "kind": "native-clock-window",
+        "startMinute": 480,
+        "endMinute": 1050,
+        "dayBoundaryHour": 6,
+        "boundary": "start-inclusive, end-exclusive"
+      }
+    }
+  ],
+  "evidenceBoundary": "Only the exact D000 layer-14/selector-30/DCHA association is an authoritative player-access rule. Layer 13 retains clock-synchronized presentation, but selector 63 is a native non-transition and is never emitted as a player portal. Scheduled-actor operation 0x2a is not an access input."
+}

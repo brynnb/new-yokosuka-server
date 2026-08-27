@@ -1,0 +1,14 @@
+# New Yokosuka Server reverse-proxy directives for the site's HTTPS block.
+# Caddy automatically preserves WebSocket upgrade headers for reverse_proxy.
+
+handle /ws {
+	reverse_proxy 127.0.0.1:8080
+}
+
+handle /api/* {
+	reverse_proxy 127.0.0.1:8080
+}
+
+handle /healthz {
+	reverse_proxy 127.0.0.1:8080
+}

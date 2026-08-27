@@ -1,0 +1,15 @@
+.git
+.github
+.build
+activity
+bin
+data
+deploy
+docs
+obj
+tools
+coverage.out
+server.env
+new-yokosuka-server
+package.json
+*.test

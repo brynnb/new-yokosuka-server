@@ -1,0 +1,13 @@
+{
+  "name": "new-yokosuka-server-data",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "generate:npcs": "node tools/generate/build_server_npc_manifest.mjs",
+    "generate:travel": "node tools/generate/build_timed_transition_access.mjs",
+    "generate:vending": "node tools/generate/build_vending_manifest.mjs",
+    "generate:avatars": "node tools/generate/build_playable_avatar_allowlist.mjs",
+    "generate": "npm run generate:npcs && npm run generate:travel && npm run generate:vending && npm run generate:avatars"
+  }
+}

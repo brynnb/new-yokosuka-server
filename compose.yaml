@@ -1,0 +1,35 @@
+services:
+  database:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_DB: new_yokosuka
+      POSTGRES_USER: new_yokosuka
+      POSTGRES_PASSWORD: new_yokosuka
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U new_yokosuka -d new_yokosuka"]
+      interval: 2s
+      timeout: 3s
+      retries: 20
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+  server:
+    build: .
+    init: true
+    depends_on:
+      database:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgres://new_yokosuka:new_yokosuka@database:5432/new_yokosuka?sslmode=disable
+      HTTP_ADDR: :8080
+      COOKIE_SECURE: "false"
+      ALLOWED_ORIGINS: http://localhost:5173,http://127.0.0.1:5173
+      ACTIVITY_LOG_PATH: /var/lib/new-yokosuka/activity/events.jsonl
+    ports:
+      - "${NEW_YOKOSUKA_HTTP_PORT:-8080}:8080"
+    volumes:
+      - server-activity:/var/lib/new-yokosuka/activity
+
+volumes:
+  postgres-data:
+  server-activity:

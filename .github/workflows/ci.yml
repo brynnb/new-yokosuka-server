@@ -1,0 +1,62 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:17-alpine
+        env:
+          POSTGRES_DB: new_yokosuka_test
+          POSTGRES_USER: new_yokosuka
+          POSTGRES_PASSWORD: new_yokosuka
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U new_yokosuka -d new_yokosuka_test"
+          --health-interval 2s
+          --health-timeout 3s
+          --health-retries 20
+    env:
+      NEW_YOKOSUKA_TEST_DATABASE_URL: postgres://new_yokosuka:new_yokosuka@127.0.0.1:5432/new_yokosuka_test?sslmode=disable
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+          cache-dependency-path: go.sum
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "9.0.x"
+
+      - name: Verify generated server data
+        run: |
+          npm run generate
+          git diff --exit-code -- internal
+
+      - name: Build Yarn compiler bridge
+        run: >-
+          dotnet publish tools/yarn-compiler/NewYokosuka.YarnCompiler.csproj
+          --configuration Release
+          --output .build/yarn-compiler
+
+      - name: Test server
+        env:
+          NEW_YOKOSUKA_YARN_COMPILER: ${{ github.workspace }}/.build/yarn-compiler/NewYokosuka.YarnCompiler
+        run: go test ./...
+
+      - name: Build static server
+        run: CGO_ENABLED=0 go build -o .build/new-yokosuka-server ./cmd/server

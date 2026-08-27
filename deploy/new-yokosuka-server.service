@@ -1,0 +1,22 @@
+[Unit]
+Description=New Yokosuka Server
+After=network-online.target postgresql.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=new-yokosuka
+Group=new-yokosuka
+WorkingDirectory=/opt/new-yokosuka-server
+EnvironmentFile=/opt/new-yokosuka-server/server.env
+ExecStart=/opt/new-yokosuka-server/new-yokosuka-server
+Restart=always
+RestartSec=3
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=read-only
+ReadWritePaths=/opt/new-yokosuka-server/activity
+
+[Install]
+WantedBy=multi-user.target

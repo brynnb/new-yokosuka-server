@@ -1,0 +1,19 @@
+# Local configuration and secrets
+.env
+.env.*
+!.env.example
+server.env
+
+# Runtime state and build products
+activity/
+new-yokosuka-server
+.build/
+bin/
+obj/
+coverage.out
+*.test
+
+# Editor and operating-system files
+.DS_Store
+.idea/
+.vscode/

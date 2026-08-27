@@ -1,0 +1,5 @@
+internal/game/npc_avatars_generated.go linguist-generated=true
+internal/npcdata/manifest.json linguist-generated=true -diff
+internal/npcdata/transition-audit.json linguist-generated=true -diff
+internal/travelaccess/rules.json linguist-generated=true -diff
+internal/vending/manifest.json linguist-generated=true -diff

@@ -1,0 +1,23 @@
+[
+  {
+    "id": "conversation",
+    "title": "Conversation",
+    "description": "A direct character exchange with no durable state change.",
+    "summary": "A short character conversation.",
+    "sourceText": "title: Start\n---\nRyo: Write the opening line here. #speaker:AKIR\nHato: Write the response here. #speaker:HATO\n<<complete>>\n===\n"
+  },
+  {
+    "id": "flag-branch",
+    "title": "Story flag branch",
+    "description": "Different dialogue before and after an authoritative story flag is committed.",
+    "summary": "A repeatable conversation with first-time and repeat branches.",
+    "sourceText": "title: Start\n---\n<<if flag_set(\"community.example.met\")>>\n    Ryo: We have already talked about this. #speaker:AKIR\n<<else>>\n    Ryo: This is our first conversation. #speaker:AKIR\n    <<set_flag \"community.example.met\">>\n<<endif>>\n<<complete>>\n===\n"
+  },
+  {
+    "id": "choice",
+    "title": "Player choice",
+    "description": "A visible response choice resolved by the authoritative pinned run.",
+    "summary": "A conversation with two player responses.",
+    "sourceText": "title: Start\n---\nRyo: What should I ask? #speaker:AKIR\n-> Ask about the neighborhood\n    Ryo: Have you seen anything unusual nearby? #speaker:AKIR\n-> Leave\n    Ryo: I should keep moving. #speaker:AKIR\n<<complete>>\n===\n"
+  }
+]
