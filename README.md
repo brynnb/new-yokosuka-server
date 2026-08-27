@@ -1,5 +1,11 @@
 # New Yokosuka Server
 
+<img width="2504" height="1824" alt="image" src="https://github.com/user-attachments/assets/e1b0be70-863a-41d8-b59a-0eeea7f11d25" />
+
+
+<img width="2504" height="1824" alt="image" src="https://github.com/user-attachments/assets/999df1a5-724a-4654-88fe-26641f8e41aa" />
+
+
 New Yokosuka is a fan-made online recreation of the world of *Shenmue*.
 *Shenmue* is a story-driven adventure game first released for the Sega
 Dreamcast in 1999. It follows a young man named Ryo Hazuki as he explores 1980s
