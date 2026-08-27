@@ -12,6 +12,8 @@ Dreamcast in 1999. It follows a young man named Ryo Hazuki as he explores 1980s
 Japan. This repository contains the server that lets New Yokosuka players share
 that world and saves their progress.
 
+The game can be played live at [New Yokosuka](https://www.newyokosuka.com/).
+
 The server provides account and character persistence, authenticated
 WebSockets, world-state broadcasts, scheduled NPC simulation, chat, economy,
 vending, arcade scores, and the server-authoritative Yarn event runtime.
